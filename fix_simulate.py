@@ -120,7 +120,7 @@ def addVelocity(u, v):
 
 def addDensity(dens):
     for x, y, a in config.points:
-        dens[x, y] = 1
+        dens[x, y] += a * config.DELTATIME
 
 def update(N, den_prev, den, u_prev, u, v_prev, v):
     addDensity(den_prev)
