@@ -3,6 +3,14 @@ import numpy as np
 import config
 import matplotlib.pyplot as plt
 
+def output_video(frames, filename):
+    height, width, _ = frames[0].shape
+    fourcc = cv2.VideoWriter_fourcc(*'XVID')
+    out = cv2.VideoWriter(filename, fourcc, 20.0, (width, height))
+    for frame in frames:
+        out.write(frame)
+    out.release()
+
 def showArrayHeatmap(arr, title="out"):
     heat = arr.copy()
     print("sum", np.sum(heat), "max", np.max(heat),"min", np.min(heat))
@@ -12,8 +20,10 @@ def showArrayHeatmap(arr, title="out"):
     #heat = cv2.normalize(heat, None, 0, 255, cv2.NORM_MINMAX).astype(np.uint8)
     heat = cv2.applyColorMap(heat, cv2.COLORMAP_JET)
     heat = cv2.resize(heat, (config.WINDOW_SIZE, config.WINDOW_SIZE), cv2.INTER_NEAREST)
-
+    
     cv2.imshow(title, heat)
+    return heat
+
 def drawVel(u0, v0, den):
     #draw velocity
     x, y = range(config.SIZE+2), range(config.SIZE+2)
@@ -24,8 +34,7 @@ def drawVel(u0, v0, den):
     plt.imshow(den)
     plt.quiver(x,y,u,v, scale = 10)
     plt.show()
-    
-    
+
 def sumOfDivergence(u, v):
     u = u.copy()
     v = v.copy()

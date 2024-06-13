@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import cv2
 import math
 
-from util import showArrayHeatmap, drawVel
+from util import showArrayHeatmap, drawVel, output_video
 from fix_simulate import *
 import config
 import circularflow
@@ -20,8 +20,6 @@ vec = [
 np.random.seed(0)
 
 density = np.zeros((config.SIZE+2, config.SIZE+2), np.float32)
-#density = 0.5 * np.random.random((config.SIZE+2, config.SIZE+2)).astype(np.float32)
-#density_prev = np.zeros((config.SIZE+2, config.SIZE+2), np.float32)
 density_prev = np.zeros((config.SIZE+2, config.SIZE+2), np.float32)
 
 u_prev = np.zeros((config.SIZE+2, config.SIZE+2), np.float32)
@@ -34,9 +32,11 @@ u_prev[16, 16] = 20
 
 cnt = 0
 
+frames = []
+
 while True:
     update(config.SIZE, density_prev, density, u_prev, u, v_prev, v, )
-    showArrayHeatmap(density)
+    frames.append(showArrayHeatmap(density))
     cnt += 1
     if cnt % 10 == 0: # for debugging
         #drawVel(u, v, density)
@@ -54,3 +54,5 @@ while True:
     v_prev[8, 8] = vec[(int(cnt * config.DELTATIME)) % 4][1]
         
 cv2.destroyAllWindows()
+
+output_video(frames, "output.mp4")
