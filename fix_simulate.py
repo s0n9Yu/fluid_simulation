@@ -114,7 +114,7 @@ def den_step(N, x, x0, u, v):
 
 def addVelocity(u, v):
     for x, y, a in config.velocity_x:
-        u[x, y] = a * config.DELTATIME
+        u[x, y] += a * config.DELTATIME
     for x, y, a in config.velocity_y:
         v[x, y] += a * config.DELTATIME
 
