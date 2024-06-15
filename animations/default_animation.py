@@ -2,8 +2,8 @@ import config
 import numpy as np
 
 points=[(20, 20, 1000)]
-velocity_x = [(20, 20, -10000)]
-velocity_y = [(20, 20, 10000)]
+velocity_x = [(20, 20, -50000)]
+velocity_y = [(20, 20, 50000)]
 
 def getSource(timestep):
     mat = np.zeros((config.SIZE+2, config.SIZE+2), dtype=np.float32)
