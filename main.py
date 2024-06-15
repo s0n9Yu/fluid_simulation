@@ -38,7 +38,7 @@ while True:
     density_prev = np.zeros((config.SIZE+2, config.SIZE+2), np.float32)
     u_prev = np.zeros((config.SIZE+2, config.SIZE+2), np.float32)
     v_prev = np.zeros((config.SIZE+2, config.SIZE+2), np.float32)
-    update(config.SIZE, density_prev, density, u_prev, u, v_prev, v, )
+    update(config.SIZE, density_prev, density, u_prev, u, v_prev, v, cnt)
     frames.append(showArrayHeatmap(density))
     cnt += 1
         
