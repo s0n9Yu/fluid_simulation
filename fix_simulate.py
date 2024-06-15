@@ -2,7 +2,6 @@ import numpy as np
 import config
 import util
 from default_animation import getAcceleration, getSource
-from default_animation import getAcceleration, getSource
 
 def set_bound(N, b, x):
     for i in range(1, N+1):
