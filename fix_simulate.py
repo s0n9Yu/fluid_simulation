@@ -1,7 +1,7 @@
 import numpy as np
 import config
 import util
-from animations.alternate_direction import getAcceleration, getSource
+#from animations.alternate_direction import getAcceleration, getSource
 
 def set_bound(N, b, x):
     for i in range(1, N+1):
@@ -113,18 +113,18 @@ def den_step(N, x, x0, u, v):
     x0, x = x, x0
     advect(N, 0, x, x0, u, v)
 
-def addVelocity(u, v, timestep):
-    accu, accv = getAcceleration(timestep)
+def addVelocity(u, v, timestep, animation):
+    accu, accv = animation.getAcceleration(timestep)
     u += accu
     v += accv
 
-def addDensity(dens, timestep):
-    adds = getSource(timestep)
+def addDensity(dens, timestep, animation):
+    adds = animation.getSource(timestep)
     dens += adds
     
-def update(N, den_prev, den, u_prev, u, v_prev, v, timestep):
-    addDensity(den_prev, timestep)
-    addVelocity(u_prev, v_prev, timestep)
+def update(N, den_prev, den, u_prev, u, v_prev, v, timestep, animation):
+    addDensity(den_prev, timestep, animation)
+    addVelocity(u_prev, v_prev, timestep, animation)
     # vel step
     vel_step(N, u, v, u_prev, v_prev)
     # dense step

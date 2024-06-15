@@ -6,16 +6,15 @@ import math
 from util import showArrayHeatmap, drawVel, output_video
 from fix_simulate import *
 import config
-import circularflow
-import randomflow
-import constantflow
 
-vec = [
-    [100, 0],
-    [0, 100],
-    [100, 0],
-    [0, 100],
-]
+import importlib
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-a", "--animation", default="default_animation")
+args = parser.parse_args()
+animation = importlib.import_module(f"animations.{args.animation}")
+
 
 np.random.seed(0)
 
@@ -38,7 +37,7 @@ while True:
     density_prev = np.zeros((config.SIZE+2, config.SIZE+2), np.float32)
     u_prev = np.zeros((config.SIZE+2, config.SIZE+2), np.float32)
     v_prev = np.zeros((config.SIZE+2, config.SIZE+2), np.float32)
-    update(config.SIZE, density_prev, density, u_prev, u, v_prev, v, cnt)
+    update(config.SIZE, density_prev, density, u_prev, u, v_prev, v, cnt, animation)
     frames.append(showArrayHeatmap(density))
     cnt += 1
         
