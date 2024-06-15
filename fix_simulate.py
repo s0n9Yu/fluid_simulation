@@ -2,6 +2,7 @@ import numpy as np
 import config
 import util
 from default_animation import getAcceleration, getSource
+from default_animation import getAcceleration, getSource
 
 def set_bound(N, b, x):
     for i in range(1, N+1):
@@ -117,20 +118,10 @@ def addVelocity(u, v, timestep):
     accu, accv = getAcceleration(timestep)
     u += accu
     v += accv
-    '''
-    for x, y, a in config.velocity_x:
-        u[x, y] += a * config.DELTATIME
-    for x, y, a in config.velocity_y:
-        v[x, y] += a * config.DELTATIME
-    '''
 
 def addDensity(dens, timestep):
     adds = getSource(timestep)
     dens += adds
-    '''
-    for x, y, a in config.points:
-        dens[x, y] += a * config.DELTATIME
-    '''
     
 def update(N, den_prev, den, u_prev, u, v_prev, v, timestep):
     addDensity(den_prev, timestep)
