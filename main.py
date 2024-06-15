@@ -12,8 +12,10 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-a", "--animation", default="default_animation")
+parser.add_argument("-o", "--output", default="output")
 args = parser.parse_args()
 animation = importlib.import_module(f"animations.{args.animation}")
+output_path = args.output
 
 
 np.random.seed(0)
@@ -43,4 +45,4 @@ while True:
         
 cv2.destroyAllWindows()
 
-output_video(frames, "output.mp4")
+output_video(frames, f"{output_path}.mp4")
