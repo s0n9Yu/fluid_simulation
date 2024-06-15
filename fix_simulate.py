@@ -49,8 +49,8 @@ def project(N, u, v, p, div):
     
     
     
-def diffusion(N, b, x, x0):
-    a = config.DELTATIME * config.DIFFUSION_FACTOR * N * N
+def diffusion(N, b, x, x0, diffusion_factor):
+    a = config.DELTATIME * diffusion_factor * N * N
     for k in range(config.ITERATION):
         for i in range(1, N+1):
             for j in range(1, N+1):
@@ -98,9 +98,9 @@ def vel_step(N, u, v, u0, v0):
     addSource(N, u, u0)
     addSource(N, v, v0)
     u, u0 = u0, u
-    diffusion(N, 1, u, u0)
+    diffusion(N, 1, u, u0, config.DIFFUSION_FACTOR_VELOCITY)
     v, v0 = v0, v
-    diffusion(N, 2, v, v0)
+    diffusion(N, 2, v, v0, config.DIFFUSION_FACTOR_VELOCITY)
     project(N, u, v, u0, v0)
     u, u0, v, v0 = u0, u, v0, v
     advect(N, 1, u, u0, u0, v0)
@@ -109,7 +109,7 @@ def vel_step(N, u, v, u0, v0):
 def den_step(N, x, x0, u, v):
     addSource(N, x, x0)
     x0, x = x, x0
-    diffusion(N, 0, x, x0)
+    diffusion(N, 0, x, x0, config.DIFFUSION_FACTOR_DENSITY)
     x0, x = x, x0
     advect(N, 0, x, x0, u, v)
 
