@@ -1,7 +1,8 @@
-import numpy as np
+import cv2
 SIZE = 48
 DELTATIME = 0.02
 DIFFUSION_FACTOR = 0.001
 ITERATION = 5
 WINDOW_SIZE = 512
 lr = 0.5
+COLORMAP = cv2.COLORMAP_BONE

@@ -18,7 +18,7 @@ def showArrayHeatmap(arr, title="out"):
     heat = heat.astype(np.uint8)
     print("after", "sum", np.sum(heat), "max", np.max(heat),"min", np.min(heat))
     #heat = cv2.normalize(heat, None, 0, 255, cv2.NORM_MINMAX).astype(np.uint8)
-    heat = cv2.applyColorMap(heat, cv2.COLORMAP_JET)
+    heat = cv2.applyColorMap(heat, config.COLORMAP)
     heat = cv2.resize(heat, (config.WINDOW_SIZE, config.WINDOW_SIZE), cv2.INTER_NEAREST)
     
     cv2.imshow(title, heat)
