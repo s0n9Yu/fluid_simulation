@@ -15,7 +15,7 @@ def getAcceleration(timestep):
     u = np.zeros((config.SIZE+2, config.SIZE+2), dtype=np.float32)
     v = np.zeros((config.SIZE+2, config.SIZE+2), dtype=np.float32)
     
-    idx = (timestep // 10) % len(velocity_x)
+    idx = (timestep // int(0.2 / config.DELTATIME)) % len(velocity_x)
     x, y, au = velocity_x[idx]
     av = velocity_y[idx][2]
     u[x, y] += au * config.DELTATIME
