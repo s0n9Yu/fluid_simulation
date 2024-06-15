@@ -1,7 +1,7 @@
 import numpy as np
 import config
 import util
-from alternate_direction import getAcceleration, getSource
+from animations.alternate_direction import getAcceleration, getSource
 
 def set_bound(N, b, x):
     for i in range(1, N+1):
