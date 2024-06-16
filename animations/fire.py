@@ -23,7 +23,7 @@ def getAcceleration(timestep):
        for y in range(1, config.SIZE):
             #v[config.SIZE - 5, y] += (random.random() * (200000) - 100000) * config.DELTATIME
             v[x, y] += (random.random() * (100000) - 50000) * config.DELTATIME
-    u += (-1000) * config.DELTATIME # for floating
+    u[:, :config.SIZE - 4] += (-1000) * config.DELTATIME # for floating
       
     
     return u, v
